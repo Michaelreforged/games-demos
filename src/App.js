@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import Memory from "./Memory";
+import TicTacToe from "./TicTacToe";
+
 
 function App() {
+  const [show, setShow]=useState({ticTacToe:false, memory:false})
+
+  const changeShow = (game) =>{
+    show[game] = !show[game]
+    setShow({...show})
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="parent">
+      <h1>Games</h1>
+      <button onClick={()=>{changeShow('ticTacToe')}}>Show Tic Tac Toe</button>
+      {show.ticTacToe && <TicTacToe/>}
+      <br/>
+      <button onClick={()=>{changeShow('memory')}}>Show Memory</button>
+      {show.memory && <Memory/>}
     </div>
   );
 }
